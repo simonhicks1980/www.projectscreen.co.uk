@@ -1,0 +1,16 @@
+on: push
+name: Publish Website
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@2.0.0
+      env:
+        FTP_SERVER: 80.244.183.137
+        FTP_USERNAME: web-01-ftp
+        FTP_PASSWORD: ${{ secrets.ftp_password }}
+        REMOTE_DIR: www.projectscreen.co.uk/production/
+        ARGS: --parallel=20 --exclude-glob=.git*/** --exclude-glob=.git**
